@@ -1,6 +1,6 @@
 module Types where
 
-newtype Marks = Marks { unMarks :: [YearMark] }
+newtype Marks = Marks { getYearMarks :: [YearMark] }
 
 data YearMark = YearMark
   { weighting :: Int
@@ -13,19 +13,19 @@ data UnitMark = UnitMark
   , mark     :: Int
   } deriving Show
 
-data Calculations = Calc
+data Stats = Stats
   { finalGrade :: Grade
   , finalMark  :: Int
   } deriving Show
 
-data AccCalc = AccCalc
+data AccStats = AccStats
   { accWeight             :: Int
   , accWeightedMark       :: Double
   , accWeightedCredsAbove :: CreditsAbove
-  , yearCalcs             :: [YearCalc]
+  , yearStatss            :: [YearStats]
   } deriving Show
 
-data YearCalc = YearCalc
+data YearStats = YearStats
   { yearWeighting :: Int
   , totalCredits  :: Int
   , weightedMark  :: Double
@@ -44,4 +44,5 @@ data CreditsAbove = CreditsAbove
   , third  :: Int
   } deriving Show
 
+emptyCA :: CreditsAbove
 emptyCA = CreditsAbove 0 0 0 0 0
