@@ -6,9 +6,11 @@ import Utility
 
 calculate :: Marks -> Stats
 calculate = finalise         -- Stats
-          . processYearStats -- AccStats
+          . processAllYears  -- AccStats
           . map processYear  -- [YearStats]
           . getYearMarks     -- [YearMarks]
+
+-- Finalise 
 
 finalise :: AccStats -> Stats
 finalise AccStats{..} = Stats{..}
@@ -34,8 +36,10 @@ secondaryRule TwoOne credAbove = if twoOne credAbove >= (totalWeightedCredits cr
 secondaryRule TwoTwo credAbove = if twoTwo credAbove >= (totalWeightedCredits credAbove `div` 2) then TwoTwo else Third
 secondaryRule Third  credAbove = if third credAbove >= (totalWeightedCredits credAbove `div` 2) then Third else Fail
 
-processYearStats :: [YearStats] -> AccStats
-processYearStats = foldr f (AccStats 0 0 emptyCA [])
+-- Process the stats from all the years
+
+processAllYears :: [YearStats] -> AccStats
+processAllYears = foldr f (AccStats 0 0 emptyCA [])
   where
     f :: YearStats -> AccStats -> AccStats
     f y@YearStats{..} AccStats{..} = AccStats
