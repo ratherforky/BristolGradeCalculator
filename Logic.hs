@@ -27,7 +27,7 @@ calcGrade mark credsAbove
   | mark >= 50 = TwoTwo
   | mark >= 68 = secondaryRule TwoTwo credsAbove
   | mark >= 40 = Third
-  | mark >= 68 = secondaryRule Third credsAbove
+  | mark >= 38 = secondaryRule Third credsAbove
   | otherwise  = Fail
 
 secondaryRule :: Grade -> CreditsAbove -> Grade
